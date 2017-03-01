@@ -6,7 +6,6 @@ import edu.esa.core.structure.GraphStructureBuilderEngineWrapper;
 import edu.esa.core.structure.GraphStructureBuilderImpl;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
