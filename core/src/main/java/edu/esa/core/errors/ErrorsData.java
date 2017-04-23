@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class ErrorsData {
+    //TODO add differentiation
     private Collection<List<String>> explicitInsignificantChains;
     private Collection<List<String>> imlicitInsignificantChains;
 
@@ -11,6 +12,7 @@ public class ErrorsData {
     private Collection<Collection<String>> completeDuplicates;
     private Collection<Collection<String>> partialDuplicates;
 
+    //TODO add finding
     private Collection<List<String>> redundantChains;
 
     private Collection<String> redundantForInputRules;
@@ -21,6 +23,7 @@ public class ErrorsData {
 
     private Collection<String> isolatedVertices;
 
+    //TODO left for further improvements
     private Collection<Collection<List<String>>> contradictingChains;
 
     public Collection<List<String>> getExplicitInsignificantChains() {

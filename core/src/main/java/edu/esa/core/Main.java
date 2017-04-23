@@ -7,7 +7,6 @@ import edu.esa.core.structure.GraphStructureBuilder;
 import edu.esa.core.structure.GraphStructureBuilderEngineWrapper;
 import edu.esa.core.structure.GraphStructureBuilderImpl;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 

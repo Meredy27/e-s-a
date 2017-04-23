@@ -50,6 +50,26 @@ public class GraphStructureBuilderEngineWrapper implements GraphStructureBuilder
     }
 
     @Override
+    public boolean ruleExist(String vertexFrom, String vertexTo) {
+        return builder.ruleExist(vertexFrom, vertexTo);
+    }
+
+    @Override
+    public Collection<String> findRules(String vertexFrom, String vertexTo) {
+        return builder.findRules(vertexFrom, vertexTo);
+    }
+
+    @Override
+    public Collection<String> getVerticesFrom(String ruleId) {
+        return builder.getVerticesFrom(ruleId);
+    }
+
+    @Override
+    public String getVertexTo(String ruleId) {
+        return builder.getVertexTo(ruleId);
+    }
+
+    @Override
     public GraphStructure build() {
         return builder.build();
     }

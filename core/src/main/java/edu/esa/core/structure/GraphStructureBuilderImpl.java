@@ -62,6 +62,47 @@ public class GraphStructureBuilderImpl implements GraphStructureBuilder {
         return incomeRules.get(vertexId) != null || outcomeVertices.get(vertexId) != null;
     }
 
+    @Override
+    public boolean ruleExist(String vertexFrom, String vertexTo) {
+        List<String> rules = outcomeRules.get(vertexFrom);
+        if(rules == null || rules.isEmpty()) {
+            return false;
+        }
+
+        for(String rule : rules) {
+            if(vertexTo.equals(outcomeVertices.get(rule))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Collection<String> findRules(String vertexFrom, String vertexTo) {
+        List<String> rules = outcomeRules.get(vertexFrom);
+        if(rules == null || rules.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        Collection<String> appropriateRules = new ArrayList<>();
+        for(String rule : rules) {
+            if(vertexTo.equals(outcomeVertices.get(rule))) {
+                appropriateRules.add(rule);
+            }
+        }
+        return appropriateRules;
+    }
+
+    @Override
+    public Collection<String> getVerticesFrom(String ruleId) {
+        return incomeVertices.get(ruleId);
+    }
+
+    @Override
+    public String getVertexTo(String ruleId) {
+        return outcomeVertices.get(ruleId);
+    }
+
     private void addIncomeVertex(String ruleId, String vertexFrom){
         incomeVertices.computeIfAbsent(ruleId, k -> new ArrayList<>());
         incomeVertices.get(ruleId).add(vertexFrom);
