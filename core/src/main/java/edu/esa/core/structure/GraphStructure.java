@@ -1,9 +1,6 @@
 package edu.esa.core.structure;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GraphStructure {
     private Map<String, List<String>> incomeVertices;
@@ -33,5 +30,41 @@ public class GraphStructure {
 
     public Map<String, List<String>> outcomeRules(){
         return outcomeRules;
+    }
+
+    public boolean ruleExist(String vertexTo, Collection<String> verticesFrom) {
+        Collection<String> rules = incomeRules.get(vertexTo);
+
+        if(rules.isEmpty()) {
+             return false;
+        }
+
+        for(String rule : rules) {
+            Collection<String> ruleVerticesFrom = incomeVertices.get(rule);
+            if(ruleVerticesFrom.containsAll(verticesFrom)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Collection<String> getRules(String vertexTo, Collection<String> verticesFrom) {
+        Collection<String> rules = incomeRules.get(vertexTo);
+
+        if(rules.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
+
+        Collection<String> result = Collections.EMPTY_LIST;
+        for(String rule : rules) {
+            Collection<String> ruleVerticesFrom = incomeVertices.get(rule);
+            if(ruleVerticesFrom.containsAll(verticesFrom)) {
+                if(result.isEmpty()) {
+                    result = new ArrayList<>();
+                }
+                result.add(rule);
+            }
+        }
+        return result;
     }
 }

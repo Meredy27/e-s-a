@@ -34,7 +34,7 @@ public class ErrorsData {
         this.explicitInsignificantChains = explicitInsignificantChains;
     }
 
-    public Collection<List<String>> getImlicitInsignificantChains() {
+    public Collection<List<String>> getImplicitInsignificantChains() {
         return imlicitInsignificantChains;
     }
 
