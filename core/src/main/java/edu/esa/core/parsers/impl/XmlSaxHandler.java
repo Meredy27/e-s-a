@@ -12,6 +12,7 @@ public class XmlSaxHandler extends DefaultHandler{
     private GraphStructureBuilder builder;
 
     private Collection<String> goals = new ArrayList<>();
+    private Collection<String> input = new ArrayList<>();
     private String ruleId;
     private Collection<String> inputFacts = new ArrayList<>();
     private String outputFact;
@@ -29,6 +30,8 @@ public class XmlSaxHandler extends DefaultHandler{
                 builder.addVertex(atts.getValue("id"));
                 if("true".equals(atts.getValue("isGoal"))) {
                     goals.add(atts.getValue("id"));
+                } else if ("true".equals(atts.getValue("isInput"))) {
+                    input.add(atts.getValue("id"));
                 }
                 break;
             case "rule":
@@ -73,5 +76,6 @@ public class XmlSaxHandler extends DefaultHandler{
         @Override
     public void endDocument() {
         builder.setGoals(goals);
+        builder.setInputFacts(input);
     }
 }

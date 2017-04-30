@@ -2,6 +2,7 @@ package edu.esa.core.engine;
 
 import edu.esa.core.GraphData;
 import edu.esa.core.structure.GraphStructure;
+import edu.esa.core.structure.GraphStructureBuilder;
 import edu.esa.core.structure.GraphStructureBuilderImpl;
 import org.junit.Test;
 
@@ -26,24 +27,24 @@ public class RedundantChainsFinderTest {
 
         GraphData graphData = new GraphData(testStructure, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
 
-        Collection<List<String>> actual = engine.findRedundantChains(testStructure, graphData);
+        Collection<List<String>> actual = engine.find(testStructure);
 
         assertTrue("No redundant chains should be found", actual.isEmpty());
     }
 
     @Test
     public void testFindRedundantChainsExist() {
-        GraphStructure testStructure = new GraphStructureBuilderImpl()
+        GraphStructureBuilder builder = new GraphStructureBuilderImpl()
                 .addVertices("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10")
                 .addRule("r1", "v3", "v1", "v2")
                 .addRule("r2", "v5", "v3", "v4")
                 .addRule("r3", "v8", "v5", "v6")
-                .addRule("r4", "v7", "v5", "v6")
-                .build();
+                .addRule("r4", "v7", "v5", "v6");
 
-        GraphData graphData = new GraphData(testStructure, Collections.EMPTY_LIST, Arrays.asList("v8", "v10"));
+        builder.setGoals(Arrays.asList("v8", "v10"));
+        GraphStructure testStructure = builder.build();
 
-        Collection<List<String>> actual = engine.findRedundantChains(testStructure, graphData);
+        Collection<List<String>> actual = engine.find(testStructure);
 
         Collection<String> expected = Arrays.asList("r1", "r2", "r4");
 
@@ -54,17 +55,17 @@ public class RedundantChainsFinderTest {
 
     @Test
     public void testFindRedundantChainsAbsent() {
-        GraphStructure testStructure = new GraphStructureBuilderImpl()
+        GraphStructureBuilder builder = new GraphStructureBuilderImpl()
                 .addVertices("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8")
                 .addRule("r1", "v3", "v1", "v2")
                 .addRule("r2", "v5", "v3", "v4")
                 .addRule("r3", "v8", "v5", "v6")
-                .addRule("r4", "v7", "v5", "v6")
-                .build();
+                .addRule("r4", "v7", "v5", "v6");
 
-        GraphData graphData = new GraphData(testStructure, Collections.EMPTY_LIST, Arrays.asList("v7", "v8"));
+        builder.setGoals(Arrays.asList("v7", "v8"));
+        GraphStructure testStructure = builder.build();
 
-        Collection<List<String>> actual = engine.findRedundantChains(testStructure, graphData);
+        Collection<List<String>> actual = engine.find(testStructure);
 
         assertTrue("There should be no redundant chains found, actual: " + actual, actual.isEmpty());
     }

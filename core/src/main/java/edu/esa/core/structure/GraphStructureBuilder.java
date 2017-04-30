@@ -18,6 +18,8 @@ public interface GraphStructureBuilder {
 
     void setGoals(Collection<String> goals);
 
+    void setInputFacts(Collection<String> facts);
+
     Collection<String> findRules(String vertexFrom, String vertexTo);
 
     Collection<String> getVerticesFrom(String ruleId);

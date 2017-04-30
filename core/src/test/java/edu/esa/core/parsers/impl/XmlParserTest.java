@@ -48,6 +48,14 @@ public class XmlParserTest {
                 structure.getGoals().size() == 1);
         assertTrue("v5 should be a goal: " + structure.getGoals(),
                 structure.getGoals().contains("v5"));
+        assertTrue("There should be 3 input facts: " + structure.getInputFacts(),
+                structure.getInputFacts().size() == 3);
+        assertTrue("v1 should be an input fact: " + structure.getInputFacts(),
+                structure.getInputFacts().contains("v1"));
+        assertTrue("v2 should be an input fact: " + structure.getInputFacts(),
+                structure.getInputFacts().contains("v2"));
+        assertTrue("v4 should be an input fact: " + structure.getInputFacts(),
+                structure.getInputFacts().contains("v4"));
         assertTrue("r1 should exist", structure.ruleExist("r1"));
         assertTrue("r2 should exist", structure.ruleExist("r2"));
         assertTrue("There should be 4 vertices with outcome rules: " + structure.outcomeRules(),

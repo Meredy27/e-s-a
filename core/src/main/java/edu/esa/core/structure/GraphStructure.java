@@ -26,7 +26,7 @@ public class GraphStructure {
 
     GraphStructure(Map<String, List<String>> incomeVertices, Map<String, String> outcomeVertices,
                    Map<String, List<String>> incomeRules, Map<String, List<String>> outcomeRules,
-                   Collection<String> goals) {
+                   Collection<String> inputVertices, Collection<String> goals) {
         this.incomeVertices = Collections.unmodifiableMap(incomeVertices);
         this.outcomeVertices = Collections.unmodifiableMap(outcomeVertices);
         this.incomeRules = Collections.unmodifiableMap(incomeRules);
@@ -107,5 +107,9 @@ public class GraphStructure {
         sb.append("\n outcome rules: ");
         sb.append(outcomeRules);
         return sb.toString();
+    }
+
+    public Collection<String> getInputFacts() {
+        return inputVertices;
     }
 }

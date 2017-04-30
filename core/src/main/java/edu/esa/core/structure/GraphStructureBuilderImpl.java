@@ -10,6 +10,7 @@ public class GraphStructureBuilderImpl implements GraphStructureBuilder {
     private Map<String, List<String>> outcomeRules;
 
     private Collection<String> goals = Collections.EMPTY_LIST;
+    private Collection<String> input = Collections.EMPTY_LIST;
 
     public GraphStructureBuilderImpl() {
         incomeVertices = new HashMap<>();
@@ -85,6 +86,11 @@ public class GraphStructureBuilderImpl implements GraphStructureBuilder {
     }
 
     @Override
+    public void setInputFacts(Collection<String> facts) {
+        this.input = facts;
+    }
+
+    @Override
     public Collection<String> findRules(String vertexFrom, String vertexTo) {
         List<String> rules = outcomeRules.get(vertexFrom);
         if(rules == null || rules.isEmpty()) {
@@ -135,11 +141,7 @@ public class GraphStructureBuilderImpl implements GraphStructureBuilder {
 
     @Override
     public GraphStructure build(){
-        if(goals.isEmpty()) {
-            return new GraphStructure(incomeVertices, outcomeVertices, incomeRules, outcomeRules);
-        } else {
-            return new GraphStructure(incomeVertices, outcomeVertices, incomeRules, outcomeRules,
-                    goals);
-        }
+        return new GraphStructure(incomeVertices, outcomeVertices, incomeRules, outcomeRules,
+                    input, goals);
     }
 }

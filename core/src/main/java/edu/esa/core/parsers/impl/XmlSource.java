@@ -1,6 +1,7 @@
 package edu.esa.core.parsers.impl;
 
 import edu.esa.core.parsers.KnowledgeBaseSource;
+import edu.esa.core.parsers.SourceType;
 
 public class XmlSource implements KnowledgeBaseSource{
     private String fileName;
@@ -11,5 +12,10 @@ public class XmlSource implements KnowledgeBaseSource{
 
     public String getFileName() {
         return fileName;
+    }
+
+    @Override
+    public SourceType getType() {
+        return SourceType.XML;
     }
 }

@@ -60,6 +60,11 @@ public class GraphStructureBuilderEngineWrapper implements GraphStructureBuilder
     }
 
     @Override
+    public void setInputFacts(Collection<String> facts) {
+        builder.setInputFacts(facts);
+    }
+
+    @Override
     public Collection<String> findRules(String vertexFrom, String vertexTo) {
         return builder.findRules(vertexFrom, vertexTo);
     }

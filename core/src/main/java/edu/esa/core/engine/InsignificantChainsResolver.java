@@ -9,7 +9,7 @@ import java.util.List;
 
 public class InsignificantChainsResolver {
 
-    private InsignificantChainsFinder errosFinder = new InsignificantChainsFinder();
+    private InsignificantChainsFinder errorsFinder = new InsignificantChainsFinder();
 
     private Collection<List<String>> explicitInsignificantChains;
     private Collection<List<String>> implicitInsignificantChains;
@@ -22,7 +22,7 @@ public class InsignificantChainsResolver {
     public void findErrors(GraphStructure structure) {
         clear();
 
-        Collection<List<String>> insignificantChains = errosFinder.find(structure);
+        Collection<List<String>> insignificantChains = errorsFinder.find(structure);
 
         for(List<String> chain : insignificantChains) {
             String outcomeVertex = structure.outcomeVertices().get(chain.get(chain.size() - 1));

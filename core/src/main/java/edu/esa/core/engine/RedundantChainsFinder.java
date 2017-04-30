@@ -7,14 +7,14 @@ import java.util.*;
 
 public class RedundantChainsFinder {
 
-    public Collection<List<String>> findRedundantChains(GraphStructure structure, GraphData graphData) {
-        if(graphData.getGoals().isEmpty()) {
+    public Collection<List<String>> find(GraphStructure structure) {
+        if(structure.getGoals().isEmpty()) {
             return Collections.emptyList();
         }
 
         Collection<String> rulesToBuildChainsTo = new ArrayList<>();
         for(Map.Entry<String, List<String>> vertex : structure.outcomeRules().entrySet()) {
-            if(vertex.getValue().isEmpty() && !graphData.getGoals().contains(vertex.getKey())) {
+            if(vertex.getValue().isEmpty() && !structure.getGoals().contains(vertex.getKey())) {
                 rulesToBuildChainsTo.addAll(structure.incomeRules().get(vertex.getKey()));
             }
         }
