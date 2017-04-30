@@ -8,12 +8,31 @@ public class GraphStructure {
     private Map<String, List<String>> incomeRules;
     private Map<String, List<String>> outcomeRules;
 
+    private Collection<String> inputVertices = Collections.EMPTY_LIST;
+
+    public Collection<String> getGoals() {
+        return goals;
+    }
+
+    private Collection<String> goals = Collections.EMPTY_LIST;
+
     GraphStructure(Map<String, List<String>> incomeVertices, Map<String, String> outcomeVertices,
                           Map<String, List<String>> incomeRules, Map<String, List<String>> outcomeRules) {
         this.incomeVertices = Collections.unmodifiableMap(incomeVertices);
         this.outcomeVertices = Collections.unmodifiableMap(outcomeVertices);
         this.incomeRules = Collections.unmodifiableMap(incomeRules);
         this.outcomeRules = Collections.unmodifiableMap(outcomeRules);
+    }
+
+    GraphStructure(Map<String, List<String>> incomeVertices, Map<String, String> outcomeVertices,
+                   Map<String, List<String>> incomeRules, Map<String, List<String>> outcomeRules,
+                   Collection<String> goals) {
+        this.incomeVertices = Collections.unmodifiableMap(incomeVertices);
+        this.outcomeVertices = Collections.unmodifiableMap(outcomeVertices);
+        this.incomeRules = Collections.unmodifiableMap(incomeRules);
+        this.outcomeRules = Collections.unmodifiableMap(outcomeRules);
+        this.inputVertices = Collections.unmodifiableCollection(inputVertices);
+        this.goals = Collections.unmodifiableCollection(goals);
     }
 
     public Map<String, List<String>> incomeVertices(){
@@ -66,5 +85,27 @@ public class GraphStructure {
             }
         }
         return result;
+    }
+
+    public boolean vertexExist(String vertex) {
+        return incomeRules.containsKey(vertex) || outcomeRules.containsKey(vertex);
+    }
+
+    public boolean ruleExist(String rule) {
+        return incomeVertices.containsKey(rule) || outcomeVertices.containsKey(rule);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n income vertices: ");
+        sb.append(incomeVertices);
+        sb.append("\n outcome vertices: ");
+        sb.append(outcomeVertices);
+        sb.append("\n income rules: ");
+        sb.append(incomeRules);
+        sb.append("\n outcome rules: ");
+        sb.append(outcomeRules);
+        return sb.toString();
     }
 }

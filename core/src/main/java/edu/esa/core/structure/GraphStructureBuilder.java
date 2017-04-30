@@ -16,6 +16,8 @@ public interface GraphStructureBuilder {
 
     boolean ruleExist(String vertexFrom, String vertexTo);
 
+    void setGoals(Collection<String> goals);
+
     Collection<String> findRules(String vertexFrom, String vertexTo);
 
     Collection<String> getVerticesFrom(String ruleId);

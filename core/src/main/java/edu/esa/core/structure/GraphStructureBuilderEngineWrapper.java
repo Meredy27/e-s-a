@@ -55,6 +55,11 @@ public class GraphStructureBuilderEngineWrapper implements GraphStructureBuilder
     }
 
     @Override
+    public void setGoals(Collection<String> goals) {
+        builder.setGoals(goals);
+    }
+
+    @Override
     public Collection<String> findRules(String vertexFrom, String vertexTo) {
         return builder.findRules(vertexFrom, vertexTo);
     }

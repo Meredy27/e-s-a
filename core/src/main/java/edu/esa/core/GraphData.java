@@ -1,4 +1,4 @@
-package edu.esa.core.errors;
+package edu.esa.core;
 
 import edu.esa.core.structure.GraphStructure;
 

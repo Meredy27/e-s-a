@@ -1,6 +1,6 @@
 package edu.esa.core.engine;
 
-import edu.esa.core.errors.GraphData;
+import edu.esa.core.GraphData;
 import edu.esa.core.structure.GraphStructure;
 import edu.esa.core.structure.GraphStructureBuilderImpl;
 import org.junit.Test;

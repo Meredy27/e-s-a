@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <facts>
+        <fact id="v1">test fact</fact>
+        <fact id="v2">something special</fact>
+        <fact id="v3">just a simple fact</fact>
+        <fact id="v4">Sherlock!</fact>
+        <fact id="v5" isGoal = "true" >it's a goal</fact>
+    </facts>
+    <rules>
+        <rule id="r1">
+            <input>v1</input>
+            <input>v2</input>
+            <output>v3</output>
+        </rule>
+        <rule id="r2">
+            <input>v3</input>
+            <input>v4</input>
+            <output>v5</output>
+        </rule>
+    </rules>
+</root>
