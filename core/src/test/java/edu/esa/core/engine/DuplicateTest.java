@@ -77,23 +77,17 @@ public class DuplicateTest {
                 .addRule("r7", "v8", "v1", "v3")
                 .addRule("r8", "v3", "v1", "v2");
 
-        Collection<String> expected1 = Arrays.asList("r1", "r2");
+        Collection<String> expected1 = Arrays.asList("r1", "r2", "r8");
         Collection<String> expected2 = Arrays.asList("r5", "r6");
-        Collection<String> expected3 = Arrays.asList("r8", "r1");
-        Collection<String> expected4 = Arrays.asList("r8", "r2");
 
         ErrorsData errorsData = findDuplicates(errorsFinder);
         Collection<Collection<String>> actual = errorsData.getCompleteDuplicates();
 
-        assertTrue("There should be 4 inclusive duplicate pairs found, actual: " + actual, actual.size() == 4);
+        assertTrue("There should be 2 complete duplicate pairs found, actual: " + actual, actual.size() == 2);
         assertTrue("Wrong duplicate pair found, actual: " + actual +"; expected: " + expected1,
                 containsCollection(actual, expected1));
         assertTrue("Wrong duplicate pair found, actual: " + actual +"; expected: " + expected2,
                 containsCollection(actual, expected2));
-        assertTrue("Wrong duplicate pair found, actual: " + actual +"; expected: " + expected3,
-                containsCollection(actual, expected3));
-        assertTrue("Wrong duplicate pair found, actual: " + actual +"; expected: " + expected4,
-                containsCollection(actual, expected4));
     }
 
     @Test

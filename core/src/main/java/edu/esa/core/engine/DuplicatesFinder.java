@@ -3,17 +3,15 @@ package edu.esa.core.engine;
 import edu.esa.core.errors.ErrorsData;
 import edu.esa.core.structure.GraphStructureBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 public class DuplicatesFinder implements ErrorsFinder{
 
     private GraphStructureBuilder builder;
 
-    private Collection<Collection<String>> inclusiveDuplicates = new ArrayList<>();
-    private Collection<Collection<String>> completeDuplicates = new ArrayList<>();
-    private Collection<Collection<String>> partialDuplicates = new ArrayList<>();
+    private List<Collection<String>> inclusiveDuplicates = new ArrayList<>();
+    private List<Collection<String>> completeDuplicates = new ArrayList<>();
+    private List<Collection<String>> partialDuplicates = new ArrayList<>();
 
     @Override
     public void setGraphStructureBuilder(GraphStructureBuilder builder) {
@@ -74,7 +72,28 @@ public class DuplicatesFinder implements ErrorsFinder{
     }
 
     private void addCompleteDuplicate(String ruleId, String duplicateId) {
-        completeDuplicates.add(Arrays.asList(ruleId, duplicateId));
+        int i = -1;
+
+        for (int j = 0; j < completeDuplicates.size(); j++) {
+            if(completeDuplicates.get(j).contains(ruleId)
+                    || completeDuplicates.get(j).contains(duplicateId)) {
+                i = j;
+                break;
+            }
+        }
+
+        if(i >=0 ) {
+            if(!completeDuplicates.get(i).contains(ruleId)) {
+                completeDuplicates.get(i).add(ruleId);
+            } else if (!completeDuplicates.get(i).contains(duplicateId)){
+                completeDuplicates.get(i).add(duplicateId);
+            }
+        } else {
+            List<String> toAdd = new ArrayList<>();
+            toAdd.add(ruleId);
+            toAdd.add(duplicateId);
+            completeDuplicates.add(toAdd);
+        }
     }
 
     private boolean containsAll(Collection<String> collection, String[] values) {

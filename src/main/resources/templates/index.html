@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Rendezvous 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130707
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Анализатор Экспертных Систем</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+	<script>
+        function uploadFile(target) {
+            document.getElementById("file-name").innerHTML = target.files[0].name;
+            document.getElementById("chosen-file").value = target.files[0].name;
+        }
+        function validateForm() {
+            if (document.getElementById("chosen-file").value == "") {
+                alert("Файл не выбран");
+                return false;
+            }
+        }
+	</script>
+</head>
+<body>
+
+<div id="wrapper">
+	<div id="header-wrapper">
+		<!-- end #menu -->
+		<div id="header" class="container">
+			<div id="logo">
+				<h1><a href="#">Анализатор Экспертных Систем</a></h1>
+				<form name="myForm" method="POST" enctype="multipart/form-data" action="/index"
+					  onsubmit="return validateForm()">
+				<p id="tools">
+					<div  id="file-name" class ="file-name" th:text="${filename}? ${filename} : 'Файл базы знаний не выбран...'">Файл базы знаний не выбран...</div>
+					<label for="file" class="triangle-button">Выбрать</label>
+					<input type="file" name="file" id="file" class="inputfile" accept=".xml"
+						   onchange="uploadFile(this)"></input>
+					<label for="analyze" class="triangle-button">Проверить</label>
+					<input type="submit" id="analyze" value="Проанализировать" class="inputfile"/>
+					<input type="hidden" id="chosen-file" value="" th:value="${chosenFile}"/>
+				</p>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="page" class="container">
+		<div id="content" th:unless="${#reports.isEmpty()}">
+			<div class="title">
+				<h2>Результаты анализа</h2>
+			</div>
+			<p> Сведения о найденных структурных ошибках представлены ниже: </p>
+			<ul class="style3">
+				<li class="first">
+					<h3>Неполные дубликаты</h3>
+					<p> Неполные дубликаты: r1 и r2, r2 и r3</p>
+					<h4>Рекомендации</h4>
+					<p> Удалить правила r2 и r3</p></li>
+				<li>
+					<h3>Полные дубликаты</h3>
+					<p> Полные дубликаты: r1 и r2, r2 и r3</p>
+					<h4>Рекомендации</h4>
+				<p> Удалить правила r2 и r3</p></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="copyright">
+	<header class="title">
+		<span class="byline">Свяжитесь с нами: rinoa_27@mail.ru</span> </header>
+	<p>&copy; Анализатор Экспертных Систем. Все права защищены. </p>
+</div>
+</body>
+</html>
