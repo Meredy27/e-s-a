@@ -54,6 +54,35 @@ public class RedundantChainsFinderTest {
     }
 
     @Test
+    public void testFindSeveralRedundantChainsExist() {
+        GraphStructureBuilder builder = new GraphStructureBuilderImpl()
+                .addVertices("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10")
+                .addRule("r1", "v3", "v1", "v2")
+                .addRule("r2", "v5", "v3", "v4")
+                .addRule("r3", "v8", "v5", "v6")
+                .addRule("r4", "v7", "v5", "v6")
+                .addRule("r5", "v7", "v5", "v6")
+                .addRule("r6", "v7", "v5", "v6");
+
+        builder.setGoals(Arrays.asList("v8", "v10"));
+        GraphStructure testStructure = builder.build();
+
+        Collection<List<String>> actual = engine.find(testStructure);
+
+        Collection<String> expected1 = Arrays.asList("r1", "r2", "r4");
+        Collection<String> expected2 = Arrays.asList("r1", "r2", "r5");
+        Collection<String> expected3 = Arrays.asList("r1", "r2", "r6");
+
+        assertTrue("There should be 3 redundant chains found, actual: " + actual, actual.size() == 3);
+        assertTrue("Wrong chains found, actual: " + actual +"; expected: " + expected1,
+                containsCollection(actual, expected1));
+        assertTrue("Wrong chains found, actual: " + actual +"; expected: " + expected2,
+                containsCollection(actual, expected2));
+        assertTrue("Wrong chains found, actual: " + actual +"; expected: " + expected3,
+                containsCollection(actual, expected3));
+    }
+
+    @Test
     public void testFindRedundantChainsAbsent() {
         GraphStructureBuilder builder = new GraphStructureBuilderImpl()
                 .addVertices("v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8")

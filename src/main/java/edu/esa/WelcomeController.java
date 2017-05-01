@@ -56,7 +56,7 @@ public class WelcomeController {
             }
             target.createNewFile();
             file.transferTo(target);
-            Collection<ErrorReport> reports = analyze(filePath);
+            List<ErrorReport> reports = analyze(filePath);
             model.addAttribute("reports", reports);
         } catch (IOException e) {
             model.addAttribute("message", "Невозможно загрузить файл.");
@@ -72,13 +72,13 @@ public class WelcomeController {
         return "index";
     }
 
-    private Collection<ErrorReport> analyze(String fileName) throws KnowledgeBaseParseException {
+    private List<ErrorReport> analyze(String fileName) throws KnowledgeBaseParseException {
         KnowledgeBaseSource source =
                 FactoryCreator.getParsingFactory(SourceType.XML).buildKnowledgeBaseSourse(fileName);
 
         ErrorSearchOptions options = buildOptions();
         ErrorsData errorsData = ESAFacade.searchErrors(source, options);
-        Collection<ErrorReport> reports = buildReports(options, errorsData);
+        List<ErrorReport> reports = buildReports(options, errorsData);
         return reports;
     }
 
@@ -99,8 +99,8 @@ public class WelcomeController {
         return options;
     }
 
-    private Collection<ErrorReport> buildReports(ErrorSearchOptions options, ErrorsData errorsData){
-        Collection<ErrorReport> reports = new ArrayList<>();
+    private List<ErrorReport> buildReports(ErrorSearchOptions options, ErrorsData errorsData){
+        List<ErrorReport> reports = new ArrayList<>();
 
         ErrorType type;
         String message;
@@ -274,6 +274,9 @@ public class WelcomeController {
         List<String> points = new ArrayList<>();
 
         for(Collection<String> rulesList : rules) {
+            if(rulesList.isEmpty()) {
+                continue;
+            }
             StringBuilder sb = new StringBuilder();
             Iterator<String> it = rulesList.iterator();
             while(it.hasNext()) {
@@ -291,6 +294,9 @@ public class WelcomeController {
         List<String> points = new ArrayList<>();
 
         for(Collection<String> rulesList : rules) {
+            if(rulesList.isEmpty()) {
+                continue;
+            }
             StringBuilder sb = new StringBuilder();
             Iterator<String> it = rulesList.iterator();
             while(it.hasNext()) {

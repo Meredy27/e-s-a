@@ -59,22 +59,26 @@ Released   : 20130707
 		</div>
 	</div>
 	<div id="page" class="container">
-		<div id="content" th:unless="${#reports.isEmpty()}">
+		<div id="content" th:if="${reports == null}">
+			<div class="title">
+				<h2>Пример xml файла базы знаний</h2>
+			</div>
+			<p> Пример </p>
+		</div>
+		<div id="content" th:if="${reports != null}">
 			<div class="title">
 				<h2>Результаты анализа</h2>
 			</div>
 			<p> Сведения о найденных структурных ошибках представлены ниже: </p>
 			<ul class="style3">
-				<li class="first">
-					<h3>Неполные дубликаты</h3>
-					<p> Неполные дубликаты: r1 и r2, r2 и r3</p>
-					<h4>Рекомендации</h4>
-					<p> Удалить правила r2 и r3</p></li>
-				<li>
-					<h3>Полные дубликаты</h3>
-					<p> Полные дубликаты: r1 и r2, r2 и r3</p>
-					<h4>Рекомендации</h4>
-				<p> Удалить правила r2 и r3</p></li>
+				<li th:each="report,iter : ${reports}">
+					<h3 th:text="${report.name}"></h3>
+					<p th:text="${report.message}"></p>
+					<ul th:if="${report.points != null}" class="report">
+						<li th:each="point : ${report.points}" th:text="${point}"></li>
+					</ul>
+					<h4 th:if="${report.recommendations != null}">Рекомендации</h4>
+					<p th:if="${report.recommendations != null}" th:text="${report.recommendations}"></p></li>
 			</ul>
 		</div>
 	</div>
