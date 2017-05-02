@@ -475,6 +475,7 @@ ul.contact li a:before
 	color: black;
 	background: #FFC153;
 	border-radius: 10px;
+	text-decoration: none;
 }
 
 .triangle-button:hover {

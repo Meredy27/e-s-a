@@ -45,10 +45,10 @@ Released   : 20130707
 				<h1><a href="#">Анализатор Экспертных Систем</a></h1>
 
 				<p id="tools">
-				<form name="myForm" method="POST" enctype="multipart/form-data" action="/index"
+				<form name="myForm" method="POST" enctype="multipart/form-data" action="/"
 					  onsubmit="return validateForm()">
 					<label for="help" class="triangle-button" >Справка</label>
-					<input type="button" class="inputfile" id="help" onclick="location.href='/index';"/>
+					<input type="button" class="inputfile" id="help" onclick="location.href='/';"/>
 					<div id="file-name" class ="file-name" th:text="${filename}? ${filename} : 'Файл базы знаний не выбран...'">Файл базы знаний не выбран...</div>
 					<label for="file" class="triangle-button">Выбрать</label>
 					<input type="file" name="file" id="file" class="inputfile" accept=".xml"
@@ -79,7 +79,10 @@ Released   : 20130707
 				<h2>Как пользоваться анализатором</h2>
 			</div>
 			<p> На данный момент поддерживаются только базы знаний в формате xml.</p>
-			<p> <label class="triangle-button-internal">Загрузить xsd</label></p>
+			<p>
+				<a id="download" href="/files/knowledge_base.xsd"
+				   class="triangle-button-internal" download="knowledge_base.xsd">Загрузить xsd</a>
+			</p>
 			<p> Для работы необходимо выполнить следующие шаги:</p>
 			<ol class="style5">
 				<li>Выбрать файл с базой знаний, нажав на кнопку "Выбрать файл"</li>

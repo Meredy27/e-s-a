@@ -14,12 +14,10 @@ import edu.esa.core.parsers.exceptions.KnowledgeBaseParseException;
 import edu.esa.core.parsers.factory.FactoryCreator;
 import edu.esa.data.ErrorReport;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,20 +28,13 @@ public class WelcomeController {
     @Value("${welcome.message:test}")
     private String message = "Hello World";
 
-    @RequestMapping("/")
-    public String welcome(ModelMap model) {
-        model.put("message", this.message);
-        model.put("fileName", "test");
-        return "welcome";
-    }
-
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(ModelMap model) {
         model.clear();
         return "index";
     }
 
-    @PostMapping("/index")
+    @PostMapping("/")
     public String upload(@RequestParam("file") MultipartFile file,
                          RedirectAttributes redirectAttributes, ModelMap model) {
 
