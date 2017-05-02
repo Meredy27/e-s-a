@@ -43,27 +43,49 @@ Released   : 20130707
 		<div id="header" class="container">
 			<div id="logo">
 				<h1><a href="#">Анализатор Экспертных Систем</a></h1>
+
+				<p id="tools">
 				<form name="myForm" method="POST" enctype="multipart/form-data" action="/index"
 					  onsubmit="return validateForm()">
-				<p id="tools">
-					<div  id="file-name" class ="file-name" th:text="${filename}? ${filename} : 'Файл базы знаний не выбран...'">Файл базы знаний не выбран...</div>
+					<label for="help" class="triangle-button" >Справка</label>
+					<input type="button" class="inputfile" id="help" onclick="location.href='/index';"/>
+					<div id="file-name" class ="file-name" th:text="${filename}? ${filename} : 'Файл базы знаний не выбран...'">Файл базы знаний не выбран...</div>
 					<label for="file" class="triangle-button">Выбрать</label>
 					<input type="file" name="file" id="file" class="inputfile" accept=".xml"
 						   onchange="uploadFile(this)"></input>
 					<label for="analyze" class="triangle-button">Проверить</label>
 					<input type="submit" id="analyze" value="Проанализировать" class="inputfile"/>
 					<input type="hidden" id="chosen-file" value="" th:value="${chosenFile}"/>
-				</p>
 				</form>
+				</p>
 			</div>
 		</div>
 	</div>
 	<div id="page" class="container">
-		<div id="content" th:if="${reports == null}">
+		<div id="content" th:if="${errorMessage != null}">
 			<div class="title">
-				<h2>Пример xml файла базы знаний</h2>
+				<h2 th:text="${errorMessage}"></h2>
 			</div>
-			<p> Пример </p>
+		</div>
+		<div id="content" th:if="${reports == null and errorMessage == null}">
+			<div class="title">
+				<h2>Для чего нужен анализатор</h2>
+			</div>
+			<p> Анализатор Экспертных Систем позволяет обнаружить структурные ошибки в базах знаний
+				экспертных систем, основанных на правилах.</p>
+			<p> Выявляемые структурные ошибки: дубликаты, незначащие цепочки выввода, избыточные цепочки вывода,
+				некорректные правила, циклы, изолированные вершины.</p>
+			<div class="title">
+				<h2>Как пользоваться анализатором</h2>
+			</div>
+			<p> На данный момент поддерживаются только базы знаний в формате xml.</p>
+			<p> <label class="triangle-button-internal">Загрузить xsd</label></p>
+			<p> Для работы необходимо выполнить следующие шаги:</p>
+			<ol class="style5">
+				<li>Выбрать файл с базой знаний, нажав на кнопку "Выбрать файл"</li>
+				<li>Для проверки нажать кнопку "Проверить"</li>
+				<li>Система выведет на экран отчет о найденных ошибках</li>
+			</ol>
 		</div>
 		<div id="content" th:if="${reports != null}">
 			<div class="title">

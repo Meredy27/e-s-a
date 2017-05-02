@@ -244,6 +244,7 @@ ul.contact li a:before
 	.title
 {
 	margin-bottom: 2em;
+	margin-top: 2em;
 	text-transform: uppercase;
 }
 
@@ -467,8 +468,22 @@ ul.contact li a:before
 	border-radius: 10px;
 }
 
+.triangle-button-internal {
+	position: relative;
+	padding: 15px;
+	margin: 1em 1em 3em;
+	color: black;
+	background: #FFC153;
+	border-radius: 10px;
+}
+
 .triangle-button:hover {
 	background: #6F6F6F;
+}
+
+.triangle-button-internal:hover {
+	background: #6F6F6F;
+	color: whitesmoke;
 }
 
 .file-name
@@ -499,7 +514,7 @@ ul.contact li a:before
 {
 	position: relative;
 	overflow: hidden;
-	padding: 6em 0em 5em 0em;
+	padding: 3em 0em 4em 0em;
 }
 
 /** CONTENT */
@@ -755,4 +770,8 @@ ul.contact li a:before
 .list-style1 .first {
 	padding-top: 0px;
 	border-top: none;
+}
+
+ol.style5 li {
+	margin-bottom: 20px;
 }

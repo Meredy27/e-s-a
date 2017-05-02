@@ -59,10 +59,11 @@ public class WelcomeController {
             List<ErrorReport> reports = analyze(filePath);
             model.addAttribute("reports", reports);
         } catch (IOException e) {
-            model.addAttribute("message", "Невозможно загрузить файл.");
+            model.addAttribute("errorMessage", "Невозможно загрузить файл. Попробуйте снова");
             e.printStackTrace();
         } catch (KnowledgeBaseParseException e) {
-            model.addAttribute("message", "Невозможно проанализировать файл.");
+            model.addAttribute("errorMessage", "Невозможно проанализировать файл. " +
+                    "Попробуйте снова");
             e.printStackTrace();
         }
 
